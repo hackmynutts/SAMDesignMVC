@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Scripts/DataTable/dataTables.dataTables.min.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -36,6 +37,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/DataTable/dataTables.min.js"></script>
+    <script src="~/Scripts/SweetAlert/sweetalert2@11.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
