@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,7 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="general\DateManagement\date.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SAMDesign.Abstractions\SAMDesign.Abstractions.csproj">
+      <Project>{1efe12d8-6e99-487f-92d5-652b79a4bf8d}</Project>
+      <Name>SAMDesign.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAMDesign.DataAccess\SAMDesign.DataAccess.csproj">
+      <Project>{fb1ac30e-90d3-40d5-8550-c5c111334ebd}</Project>
+      <Name>SAMDesign.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
