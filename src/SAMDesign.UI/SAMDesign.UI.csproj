@@ -260,9 +260,16 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="css\normalize.css" />
+    <Content Include="css\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="icons\logo_pequeño-removebg-preview.png" />
+    <Content Include="icons\montañas.png" />
+    <Content Include="icons\Motocross-rafiki.png" />
+    <Content Include="icons\sam_desing-removebg-preview.png" />
+    <Content Include="icons\SAM_LETRAS-removebg-preview.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
