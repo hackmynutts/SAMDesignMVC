@@ -86,7 +86,13 @@
                                 ADMIN
                             </a>
                             <div class="dropdown-menu shadow" style="border-radius: 0; border: none; background-color: #eee/#475a68" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item nav-link text-black" href="../../src/admin/adminProductos.php">PRODUCTOS</a>
+                                @Html.ActionLink(
+                                      "PRODUCTOS",
+                                      "ListAdmin",
+                                      "Products",
+                                      null,
+                                      new { @class = "dropdown-item nav-link text-black" }
+                                  )
                                 <a class="dropdown-item nav-link text-black" href="../../src/admin/Inventario.php">INVENTARIO</a>
                                 <a class="dropdown-item nav-link text-black" href="../../src/admin/adminOrdenes.php">ORDENES</a>
                                 <a class="dropdown-item nav-link text-black" href="../../src/admin/adminBilling.php">FACTURAS</a>

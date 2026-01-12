@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAMDesign.DataAccess.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,7 +12,14 @@ namespace SAMDesign.DataAccess
     {
         public Context()
         {
+            
             Database.SetInitializer<Context>(null);
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("SAMDESIGN");
+            base.OnModelCreating(modelBuilder);
+        }
+        public DbSet<ProductsDA> Products { get; set; }
     }
 }
