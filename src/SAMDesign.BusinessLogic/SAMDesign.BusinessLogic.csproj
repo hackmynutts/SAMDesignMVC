@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="general\DateManagement\date.cs" />
+    <Compile Include="PRODUCTS\Details\ProductDetails_BL.cs" />
     <Compile Include="PRODUCTS\List\ProductsList_BL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

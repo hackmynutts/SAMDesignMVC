@@ -15,6 +15,7 @@ namespace SAMDesign.DataAccess
             
             Database.SetInitializer<Context>(null);
         }
+        //set default schema based on the database
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("SAMDESIGN");

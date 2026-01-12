@@ -1,5 +1,6 @@
 ﻿using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.List;
 using SAMDesign.Abstractions.UIModules;
+using SAMDesign.BusinessLogic.PRODUCTS.Details;
 using SAMDesign.BusinessLogic.PRODUCTS.List;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ namespace SAMDesign.UI.Controllers
     public class ProductsController : Controller
     {
         private IProductsList_BL _productsList_BL;
+        private ProductDetails_BL _productsDetails_BL;
         public ProductsController()
         {
             _productsList_BL = new ProductsList_BL();
+            _productsDetails_BL = new ProductDetails_BL();
         }
         // GET: Products
         public ActionResult List()
@@ -33,7 +36,8 @@ namespace SAMDesign.UI.Controllers
         // GET: Products/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ProductsDTO product = _productsDetails_BL.Get(id);
+            return View(product);
         }
 
         // GET: Products/Create

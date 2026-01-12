@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\PRODUCTS\Details\IProductDetails_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\List\IProductsList_BL.cs" />
+    <Compile Include="DataAccess\PRODUCTS\Details\IProductDetails_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\List\IProductList_DA.cs" />
     <Compile Include="general\DateManagement\Idate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
