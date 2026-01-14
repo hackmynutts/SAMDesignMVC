@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="general\DateManagement\date.cs" />
+    <Compile Include="PRODUCTS\Add\ProductAdd_BL.cs" />
     <Compile Include="PRODUCTS\Details\ProductDetails_BL.cs" />
     <Compile Include="PRODUCTS\List\ProductsList_BL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +57,9 @@
       <Project>{fb1ac30e-90d3-40d5-8550-c5c111334ebd}</Project>
       <Name>SAMDesign.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PRODUCTS\Edit\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

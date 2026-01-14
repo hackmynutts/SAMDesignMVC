@@ -45,6 +45,18 @@ img {
     width: 100%;
 }
 
+.FondoTablas {
+    width: 2000px; /* ocupa la mayor parte de la pantalla */
+    margin: 40px auto; /* centra horizontalmente y da margen arriba/abajo */
+    padding: 20px; /* espacio interno */
+    background-color: white; /* fondo suave */
+    border-radius: 12px; /* bordes redondeados */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* sombra sutil */
+    display: flex; /* para centrar contenido opcional */
+    flex-direction: column; /* columnas dentro del div */
+    align-items: center; /* centra horizontalmente los elementos dentro */
+}
+
 .contenedor {
     max-width: 120rem;
     margin: 0 auto;

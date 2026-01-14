@@ -7,87 +7,110 @@
 <h2>ListAdmin</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button class="btn btn-outline-primary AddProduct" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightAddProduct" aria-controls="offcanvasRightAddProduct">
+        Crear producto
+    </button>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.comments)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.img_path)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.statusID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created_by)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.created_on)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.modified_on)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.modified_by)
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table id="productTable" class="table w-100">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.comments)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.img_path)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.statusID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.created_by)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.created_on)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.modified_on)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.modified_by)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.comments)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.img_path)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.statusID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.created_by)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.created_on)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.modified_on)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.modified_by)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.img_path)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.statusID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.created_by)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.created_on)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.modified_on)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.modified_by)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+@*ADD RIGHT OFFCANVAS*@
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightAddProduct" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Agregar producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        ...
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/Products/Product.js"></script>
 }
-
-</table>

@@ -120,9 +120,13 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+
+    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
+
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/DataTable/dataTables.min.js"></script>
     <script src="~/Scripts/SweetAlert/sweetalert2@11.js"></script>
-    @RenderSection("scripts", required: false)
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

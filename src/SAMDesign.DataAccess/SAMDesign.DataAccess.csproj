@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Context.cs" />
     <Compile Include="Entities\ProductsDA.cs" />
+    <Compile Include="PRODUCTS\Add\ProductAdd_DA.cs" />
     <Compile Include="PRODUCTS\Details\ProductDetails_DA.cs" />
     <Compile Include="PRODUCTS\List\ProductList_DA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,7 +69,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="PRODUCTS\Add\" />
     <Folder Include="PRODUCTS\Edit\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
