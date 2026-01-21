@@ -46,8 +46,8 @@ namespace SAMDesign.DataAccess.PRODUCTS.Add
                 statusID = product.statusID,
                 created_by = product.created_by,
                 created_on = product.created_on,
-                modified_on = product.modified_on,
-                modified_by = product.modified_by
+                modified_by = product.modified_by,
+                modified_on = product.modified_on
             };
             return productDA;
         }

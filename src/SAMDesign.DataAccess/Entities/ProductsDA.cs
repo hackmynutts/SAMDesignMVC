@@ -24,16 +24,17 @@ namespace SAMDesign.DataAccess.Entities
         [Column("Unit_price")]
         public decimal UnitPrice { get; set; }
         [Column("Image_path")]
-        public short img_path { get; set; }
+        public string img_path { get; set; }
         [Column("Status_ID")]
-        public short statusID { get; set; }
+        public int statusID { get; set; }
         [Column("Created_By")]
-        public short created_by { get; set; }
+        public string created_by { get; set; }
         [Column("Created_On")]
-        public short created_on { get; set; }
-        [Column("Modified_On")]
-        public short modified_on { get; set; }
+        public DateTime created_on { get; set; }
         [Column("Modified_By")]
-        public short modified_by { get; set; }
+        public string modified_by { get; set; }
+        [Column("Modified_On")]
+        public DateTime? modified_on { get; set; }
+        
     }
 }

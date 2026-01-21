@@ -33,8 +33,8 @@ namespace SAMDesign.DataAccess.PRODUCTS.Details
                                               statusID = p.statusID,
                                               created_by = p.created_by,
                                               created_on = p.created_on,
-                                              modified_on = p.modified_on,
-                                              modified_by = p.modified_by
+                                              modified_by = p.modified_by,
+                                              modified_on = p.modified_on
                                           }).FirstOrDefault();
             return product;
         }

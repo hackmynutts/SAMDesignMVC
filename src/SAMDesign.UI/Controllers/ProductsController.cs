@@ -7,6 +7,7 @@ using SAMDesign.BusinessLogic.PRODUCTS.Details;
 using SAMDesign.BusinessLogic.PRODUCTS.List;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -52,46 +53,50 @@ namespace SAMDesign.UI.Controllers
             return PartialView();
         }
 
-        // POST: Products/Create
         [HttpPost]
-        public async Task<ActionResult> Create(ProductsDTO product)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(ProductsDTO model, HttpPostedFileBase ImageFile)
         {
             try
             {
-
                 if (!ModelState.IsValid)
+                    return PartialView("Create", model);
+
+                // Guardar imagen si viene
+                if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
-                    if (Request.IsAjaxRequest())
-                        return PartialView(product);
-                    return PartialView(product);
+                    var fileName = Path.GetFileName(ImageFile.FileName);
+                    var folder = Server.MapPath("~/Content/Images/Products/");
+                    Directory.CreateDirectory(folder);
+
+                    var fullPath = Path.Combine(folder, fileName);
+                    ImageFile.SaveAs(fullPath);
+
+                    model.img_path = "/Content/Images/Products/" + fileName;
                 }
-                int result = await _productAdd_BL.Add(product);
+                model.created_by = User.Identity.Name;
+                int result = await _productAdd_BL.Add(model);
 
                 if (result > 0)
                 {
                     if (Request.IsAjaxRequest())
                         return Json(new { success = true });
+
                     return RedirectToAction("ListAdmin");
                 }
 
-                ModelState.AddModelError(string.Empty, "Error al crear la palabra clave.");
-                if (Request.IsAjaxRequest())
-                {
-                    return PartialView(product);
-                }
-                return PartialView(product);
+                ModelState.AddModelError(string.Empty, "Error al crear el producto.");
+                return PartialView("Create", model);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "Error al crear la palabra clave. " + ex.GetBaseException().Message);
-
+                var msg = ex.GetBaseException().Message;
+                ModelState.AddModelError("", "Error al crear el producto. " + msg);
 
                 if (Request.IsAjaxRequest())
-                {
-                    return Json(new { success = false, error = ex.GetBaseException().Message });
-                }
-                return PartialView(product);
+                    return Json(new { success = false, error = msg });
 
+                return PartialView("Create", model);
             }
         }
 

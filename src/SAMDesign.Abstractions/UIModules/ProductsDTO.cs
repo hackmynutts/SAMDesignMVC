@@ -21,17 +21,18 @@ namespace SAMDesign.Abstractions.UIModules
         [Display(Name = "Precio")]
         public decimal UnitPrice { get; set; }
         [Display(Name = "Imagen")]
-        public short img_path { get; set; }
+        public string img_path { get; set; }
         [Display(Name = "Estado")]
-        public short statusID { get; set; }
+        public int statusID { get; set; }
         [Display(Name = "Creado por")]
-        public short created_by { get; set; }
+        public string created_by { get; set; }
         [Display(Name = "Creado el")]
-        public short created_on { get; set; }
+        public DateTime created_on { get; set; }
         [Display(Name = "Modificado por")]
-        public short modified_on { get; set; }
-        [Display(Name = "Modificado en")]
-        public short modified_by { get; set; }
+        public string modified_by { get; set; }
+        [Display(Name = "Modificado el")]
+        public DateTime? modified_on { get; set; }
+
 
     }
 }

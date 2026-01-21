@@ -33,22 +33,29 @@ $(document).on('click', '.AddProduct', function () {
     });
 });
 
-//submit create form
-$(document).on('click', '#submitAddProduct', function (e) {
+// submit create form (con archivo)
+$(document).on('submit', '#createProductForm', function (e) {
     e.preventDefault();
-    const $form = $('#offcanvasRightAddProduct').find('form');
+
+    const form = this;
+    const formData = new FormData(form);
+
     $.ajax({
-        url: 'Create',
+        url: $(form).attr('action') || 'Create',
         type: 'POST',
-        data: $form.serialize(),
+        data: formData,
+        processData: false, // IMPORTANT: no convertir a querystring
+        contentType: false, // IMPORTANT: dejar multipart/form-data
         success: function (data) {
-            if (data.success) {
+            // Si tu POST retorna JSON cuando todo OK:
+            if (data && data.success) {
                 Swal.fire({
                     title: "¡Éxito!",
-                    text: "¡El producto se ha sido creado exitosamente!",
+                    text: "¡El producto se ha creado exitosamente!",
                     icon: "success"
                 }).then(() => location.reload());
             } else {
+                // Si retorna la vista con validaciones (HTML)
                 $('#offcanvasRightAddProduct .offcanvas-body').html(data);
             }
         },
@@ -57,7 +64,7 @@ $(document).on('click', '#submitAddProduct', function (e) {
                 title: "Oops!",
                 text: "¡No se pudo crear el producto!",
                 icon: "error"
-            }).then(() => location.reload());
+            });
         }
     });
 });
