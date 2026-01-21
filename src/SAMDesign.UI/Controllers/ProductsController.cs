@@ -1,9 +1,11 @@
 ﻿using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Add;
 using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Details;
+using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Edit;
 using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.List;
 using SAMDesign.Abstractions.UIModules;
 using SAMDesign.BusinessLogic.PRODUCTS.Add;
 using SAMDesign.BusinessLogic.PRODUCTS.Details;
+using SAMDesign.BusinessLogic.PRODUCTS.Edit;
 using SAMDesign.BusinessLogic.PRODUCTS.List;
 using System;
 using System.Collections.Generic;
@@ -20,9 +22,11 @@ namespace SAMDesign.UI.Controllers
         private IProductAdd_BL _productAdd_BL;
         private IProductsList_BL _productsList_BL;
         private IProductDetails_BL _productsDetails_BL;
+        private IProductEdit_BL _productEdit_BL;
         public ProductsController()
         {
             _productAdd_BL = new ProductAdd_BL();
+            _productEdit_BL = new ProductEdit_BL();
             _productsList_BL = new ProductsList_BL();
             _productsDetails_BL = new ProductDetails_BL();
         }
@@ -65,14 +69,14 @@ namespace SAMDesign.UI.Controllers
                 // Guardar imagen si viene
                 if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
-                    var fileName = Path.GetFileName(ImageFile.FileName);
-                    var folder = Server.MapPath("~/Content/Images/Products/");
-                    Directory.CreateDirectory(folder);
+                    string fileName = Path.GetFileName(ImageFile.FileName); //retorna solo el nombre del archivo
+                    string folder = Server.MapPath("~/Content/Images/Products/"); //carpeta donde se va a guardar la imagen
+                    Directory.CreateDirectory(folder); // Crear el directorio si no existe
 
-                    var fullPath = Path.Combine(folder, fileName);
-                    ImageFile.SaveAs(fullPath);
+                    string fullPath = Path.Combine(folder, fileName); //ruta completa
+                    ImageFile.SaveAs(fullPath); //guardar la imagen en el servidor
 
-                    model.img_path = "/Content/Images/Products/" + fileName;
+                    model.img_path = "/Content/Images/Products/" + fileName; //guardar la ruta relativa en el modelo
                 }
                 model.created_by = User.Identity.Name;
                 int result = await _productAdd_BL.Add(model);
@@ -101,24 +105,55 @@ namespace SAMDesign.UI.Controllers
         }
 
         // GET: Products/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            ProductsDTO product = _productsDetails_BL.Get(id);
+            return PartialView(product);
         }
 
         // POST: Products/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(ProductsDTO model, HttpPostedFileBase ImageFile)
         {
             try
             {
-                // TODO: Add update logic here
+                if (!ModelState.IsValid)
+                    return PartialView(model);
 
-                return RedirectToAction("List");
+                // Guardar imagen si viene
+                if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(ImageFile.FileName); //retorna solo el nombre del archivo
+                    string folder = Server.MapPath("~/Content/Images/Products/"); //carpeta donde se va a guardar la imagen
+                    Directory.CreateDirectory(folder); // Crear el directorio si no existe
+
+                    string fullPath = Path.Combine(folder, fileName); //ruta completa
+                    ImageFile.SaveAs(fullPath); //guardar la imagen en el servidor
+
+                    model.img_path = "/Content/Images/Products/" + fileName; //guardar la ruta relativa en el modelo
+                }
+                model.modified_by = User.Identity.Name;
+                int result = await _productEdit_BL.Edit(model);
+
+                if (result > 0)
+                {
+                    if (Request.IsAjaxRequest())
+                        return Json(new { success = true });
+                    return RedirectToAction("ListAdmin");
+                }
+
+                ModelState.AddModelError(string.Empty, "Error al crear el producto.");
+                return RedirectToAction("Edit", model);
+
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                var msg = ex.GetBaseException().Message;
+                ModelState.AddModelError("", "Error al editar el producto. " + msg);
+                if (Request.IsAjaxRequest())
+                    return Json(new { success = false, error = msg });
+                return RedirectToAction("Edit", model);
             }
         }
     }

@@ -72,7 +72,9 @@
                         @Html.DisplayFor(modelItem => item.UnitPrice)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.img_path)
+                        <img src="@item.img_path"
+                             alt="Imagen del producto"
+                             style="width:80px; height:auto; border-radius:6px;" />
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.statusID)
@@ -90,8 +92,8 @@
                         @Html.DisplayFor(modelItem => item.modified_by)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-primary EditProduct",@data_bs_toggle = "offcanvas",@data_bs_target = "#offcanvasRightEditProduct", @aria_controls = "offcanvasRightEditProduct" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "btn btn-primary" }) 
                     </td>
                 </tr>
             }
@@ -107,7 +109,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        ...
+    </div>
+</div>
+
+@*EDIT RIGHT OFFCANVAS*@
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightEditProduct" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Editar producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
     </div>
 </div>
 

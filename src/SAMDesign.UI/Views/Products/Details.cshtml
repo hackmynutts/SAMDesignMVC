@@ -55,7 +55,21 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.img_path)
+            @if (!string.IsNullOrWhiteSpace(Model.img_path))
+            {
+                <img src="@Url.Content(Model.img_path)"
+                     alt="Imagen del producto"
+                     style="max-width: 350px; height: auto; border-radius: 8px;"
+                     class="img-thumbnail" />
+
+                <div class="mt-2">
+                    <a href="@Url.Content(Model.img_path)" target="_blank">Ver imagen en tamaño completo</a>
+                </div>
+            }
+            else
+            {
+                <span class="text-muted">Sin imagen</span>
+            }
         </dd>
 
         <dt>
