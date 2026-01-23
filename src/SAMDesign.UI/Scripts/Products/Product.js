@@ -66,7 +66,8 @@ $(document).on('submit', '#createProductForm', function (e) {
         success: function (data) {
             Swal.close();
             // Si tu POST retorna JSON cuando todo OK:
-            if (data && data.success) {
+            if (data && data.success && data.rows) {
+                console.log("Filas afectadas:", data.rows);
                 Swal.fire({
                     title: "¡Éxito!",
                     text: "¡El producto se ha creado exitosamente!",

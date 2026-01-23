@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EVENTLOG\Add\EventLogAdd_BL.cs" />
     <Compile Include="EVENTLOG\List\EventLogList_BL.cs" />
     <Compile Include="general\DateManagement\date.cs" />
     <Compile Include="PRODUCTS\Add\ProductAdd_BL.cs" />
@@ -60,8 +61,6 @@
       <Name>SAMDesign.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EVENTLOG\Add\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,8 +1,10 @@
-﻿using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Add;
+﻿using SAMDesign.Abstractions.BusinessLogic.EVENTLOGS.Add;
+using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Add;
 using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Details;
 using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Edit;
 using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.List;
 using SAMDesign.Abstractions.UIModules;
+using SAMDesign.BusinessLogic.EVENTLOG.Add;
 using SAMDesign.BusinessLogic.PRODUCTS.Add;
 using SAMDesign.BusinessLogic.PRODUCTS.Details;
 using SAMDesign.BusinessLogic.PRODUCTS.Edit;
@@ -12,18 +14,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 
 namespace SAMDesign.UI.Controllers
 {
     public class ProductsController : Controller
     {
+        private IEventLogAdd_BL _eventLogAddBL;
         private IProductAdd_BL _productAdd_BL;
         private IProductsList_BL _productsList_BL;
         private IProductDetails_BL _productsDetails_BL;
         private IProductEdit_BL _productEdit_BL;
         public ProductsController()
         {
+            _eventLogAddBL = new EventLogAdd_BL();
             _productAdd_BL = new ProductAdd_BL();
             _productEdit_BL = new ProductEdit_BL();
             _productsList_BL = new ProductsList_BL();
@@ -82,8 +87,17 @@ namespace SAMDesign.UI.Controllers
 
                 if (result > 0)
                 {
+                    EventLogDTO log = new EventLogDTO
+                    {
+                        EventTable = "Products", 
+                        TypeEvent = "Create",
+                        descripcionDeEvento = $"Producto creado: {model.ProductName} (ID: {result})",
+                        fechaDeEvento = DateTime.Now,
+                        activadoPor = User.Identity.Name
+                        };
+                    int logResult = await _eventLogAddBL.Add(log);
                     if (Request.IsAjaxRequest())
-                        return Json(new { success = true });
+                        return Json(new { success = true, rows = result });
 
                     return RedirectToAction("ListAdmin");
                 }
@@ -96,8 +110,17 @@ namespace SAMDesign.UI.Controllers
                 var msg = ex.GetBaseException().Message;
                 ModelState.AddModelError("", "Error al crear el producto. " + msg);
 
+                EventLogDTO log = new EventLogDTO
+                {
+                    EventTable = "Products",
+                    TypeEvent = "Create/Error",
+                    descripcionDeEvento = $"Producto NO creado: {model.ProductName}",
+                    fechaDeEvento = DateTime.Now,
+                    activadoPor = User.Identity.Name
+                };
+                int logResult = await _eventLogAddBL.Add(log);
                 if (Request.IsAjaxRequest())
-                    return Json(new { success = false, error = msg });
+                    return Json(new { success = false, rows = model });
 
                 return PartialView("Create", model);
             }
