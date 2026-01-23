@@ -42,18 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\EVENTLOGS\List\IEventLogList_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\Add\IProductAdd_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\Details\IProductDetails_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\Edit\IProductEdit_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\List\IProductsList_BL.cs" />
+    <Compile Include="DataAccess\EVENTLOG\List\IEventLogList_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\Add\IProductAdd_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\Details\IProductDetails_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\Edit\IProductEdit_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\List\IProductList_DA.cs" />
     <Compile Include="general\DateManagement\Idate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIModules\EventLogDTO.cs" />
     <Compile Include="UIModules\ProductsDTO.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BusinessLogic\EVENTLOGS\Add\" />
+    <Folder Include="DataAccess\EVENTLOG\Add\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

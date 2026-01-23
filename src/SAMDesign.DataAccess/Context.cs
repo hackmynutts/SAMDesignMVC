@@ -22,5 +22,6 @@ namespace SAMDesign.DataAccess
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<ProductsDA> Products { get; set; }
+        public DbSet<EventLogDA> EventLogs { get; set; }
     }
 }

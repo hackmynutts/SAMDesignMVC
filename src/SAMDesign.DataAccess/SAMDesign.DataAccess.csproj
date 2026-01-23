@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
+    <Compile Include="Entities\EventLogDA.cs" />
     <Compile Include="Entities\ProductsDA.cs" />
+    <Compile Include="EVENTLOG\List\EventLogList_DA.cs" />
     <Compile Include="PRODUCTS\Add\ProductAdd_DA.cs" />
     <Compile Include="PRODUCTS\Details\ProductDetails_DA.cs" />
     <Compile Include="PRODUCTS\Edit\ProductEdit_DA.cs" />
@@ -69,7 +71,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="EVENTLOG\Add\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<SAMDesign.Abstractions.UIModules.EventLogDTO>
+
+@{
+    ViewBag.Title = "ListLogs";
+}
+
+<h2>Event log list</h2>
+<div class="table-responsive">
+    <table class="table" id="logTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EventTable)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeEvent)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.descripcionDeEvento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.stackTrace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fechaDeEvento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.activadoPor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.datosAnteriores)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.datosPosteriores)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventTable)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeEvent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcionDeEvento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.stackTrace)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaDeEvento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.activadoPor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.datosAnteriores)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.datosPosteriores)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/EventLog/EventLog.js"></script>
+}

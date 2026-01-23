@@ -2,12 +2,11 @@
     /*Custom properties*/
     --primario: #eee;
     --primarioOscuro: #475a68;
-    --secundario: #6c7b2a;
+    --secundario: #2c4875;
     --secundarioOscuro: #817e85;
     --blanco: #EEE;
     --oscuro: #000;
-
-    --fuentePrincipal: 'Staatliches', cursive;
+    --fuentePrincipal: 'Candara';
 }
 
 html {
