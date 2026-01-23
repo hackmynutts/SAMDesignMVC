@@ -9,7 +9,7 @@ namespace SAMDesign.Abstractions.BusinessLogic.PRODUCTS.List
 {
     public interface IProductsList_BL
     {
-        List<ProductsDTO> Get();
+        List<ProductsDTO> GetActive();
         List<ProductsDTO> GetAdmin();
     }
 }

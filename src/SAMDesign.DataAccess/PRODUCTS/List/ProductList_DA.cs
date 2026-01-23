@@ -36,9 +36,10 @@ namespace SAMDesign.DataAccess.PRODUCTS.List
             return products;
         }
 
-        public List<ProductsDTO> Get()
+        public List<ProductsDTO> GetActive()
         {
             List<ProductsDTO> products = (from p in _context.Products
+                                            where p.statusID == 13
                                           select new ProductsDTO
                                           {
                                               ProductID = p.ProductID,

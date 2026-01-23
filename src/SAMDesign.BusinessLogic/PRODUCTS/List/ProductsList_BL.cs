@@ -18,17 +18,17 @@ namespace SAMDesign.BusinessLogic.PRODUCTS.List
             _productList_DA = new ProductList_DA();
         }
 
-        public List<ProductsDTO> Get()
+        public List<ProductsDTO> GetActive()
         {
 
-            List<ProductsDTO> products = _productList_DA.Get();
+            List<ProductsDTO> products = _productList_DA.GetActive();
             return products;
         }
 
         public List<ProductsDTO> GetAdmin()
         {
 
-            List<ProductsDTO> products = _productList_DA.Get();
+            List<ProductsDTO> products = _productList_DA.GetAdmin();
             return products;
         }
     }

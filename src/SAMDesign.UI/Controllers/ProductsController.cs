@@ -38,7 +38,7 @@ namespace SAMDesign.UI.Controllers
         // GET: Products
         public ActionResult List()
         {
-            List<ProductsDTO> products = _productsList_BL.Get();
+            List<ProductsDTO> products = _productsList_BL.GetActive();
             return View(products);
         }
 

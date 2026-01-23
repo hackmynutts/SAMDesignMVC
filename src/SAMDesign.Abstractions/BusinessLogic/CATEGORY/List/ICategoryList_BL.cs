@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SAMDesign.Abstractions.DataAccess.PRODUCTS.List
+namespace SAMDesign.Abstractions.BusinessLogic.CATEGORY.List
 {
-    public interface IProductList_DA
+    public interface ICategoryList_BL
     {
-        List<ProductsDTO> GetActive();
-        List<ProductsDTO> GetAdmin();
+        List<CategoryDTO> List();
     }
 }

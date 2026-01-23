@@ -80,21 +80,48 @@
                             </div>
                         </div>
                     </li>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") )
-                    { 
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
                         <li class="nav-item px-3 py-4">
                             <div class="dropdown">
-                                <a class="nav-link text-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
+                                <a class="nav-link text-white dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   data-bs-auto-close="outside">
                                     ADMIN
                                 </a>
                                 <div class="dropdown-menu shadow" style="border-radius: 0; border: none; background-color: #eee/#475a68" aria-labelledby="dropdownMenuLink">
-                                    @Html.ActionLink(
-                                          "PRODUCTOS",
-                                          "ListAdmin",
-                                          "Products",
-                                          null,
-                                          new { @class = "dropdown-item nav-link text-black" }
-                                      )
+                                    <div class="dropend d-flex align-items-center">
+                                        @Html.ActionLink(
+                                            "PRODUCTOS",
+                                            "ListAdmin",
+                                            "Products",
+                                            null,
+                                            new { @class = "dropdown-item nav-link text-black" }
+                                        )
+
+                                        <button class="btn btn-link dropdown-toggle dropdown-toggle-split px-2"
+                                                type="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                        </button>
+
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                @Html.ActionLink(
+                                                    "Categorias",
+                                                    "List",
+                                                    "Category",
+                                                    null,
+                                                    new { @class = "dropdown-item nav-link text-black", 
+                                                            @data_bs_toggle = "modal", @data_bs_target = "#staticBackdrop" }
+                                                )
+                                            </li>
+                                            @* aquí metés más opciones del submenú si querés *@
+                                        </ul>
+                                    </div>
+
                                     <a class="dropdown-item nav-link text-black" href="../../src/admin/Inventario.php">INVENTARIO</a>
                                     <a class="dropdown-item nav-link text-black" href="../../src/admin/adminOrdenes.php">ORDENES</a>
                                     <a class="dropdown-item nav-link text-black" href="../../src/admin/adminBilling.php">FACTURAS</a>
@@ -112,11 +139,6 @@
                     <li class="nav-item px-3 py-4"><a class="nav-link text-white" href="../../src/carrito.php"><i class="fa-solid fa-cart-shopping"></i></a></li>
                 </ul>
             </div>
-            @*<ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>*@
 
             @Html.Partial("_LoginPartial")
         </div>
@@ -140,3 +162,27 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+
+
+@*List MODAL CATEGORIES*@
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*End List MODAL CATEGORIES*@

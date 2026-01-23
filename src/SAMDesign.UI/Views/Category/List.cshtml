@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SAMDesign.Abstractions.UIModules.CategoryDTO>
+
+<p>
+    @Html.ActionLink("+", "Create")
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.categoryID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.categoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.categoryDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.createdBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.createdOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.updatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.updatedOn)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.categoryID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.categoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.categoryDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.createdBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.createdOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.updatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.updatedOn)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
