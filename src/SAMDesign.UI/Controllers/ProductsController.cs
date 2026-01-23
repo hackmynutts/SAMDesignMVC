@@ -12,6 +12,7 @@ using SAMDesign.BusinessLogic.PRODUCTS.List;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http.Results;
@@ -91,10 +92,12 @@ namespace SAMDesign.UI.Controllers
                     {
                         EventTable = "Products", 
                         TypeEvent = "Create",
-                        descripcionDeEvento = $"Producto creado: {model.ProductName} (ID: {result})",
+                        descripcionDeEvento = $"Producto creado: {model.ProductName}",
                         fechaDeEvento = DateTime.Now,
-                        activadoPor = User.Identity.Name
-                        };
+                        stackTrace = "Products/Create/success",
+                        activadoPor = User.Identity.Name,
+                        datosPosteriores = JsonSerializer.Serialize(model)
+                    };
                     int logResult = await _eventLogAddBL.Add(log);
                     if (Request.IsAjaxRequest())
                         return Json(new { success = true, rows = result });
@@ -116,7 +119,9 @@ namespace SAMDesign.UI.Controllers
                     TypeEvent = "Create/Error",
                     descripcionDeEvento = $"Producto NO creado: {model.ProductName}",
                     fechaDeEvento = DateTime.Now,
-                    activadoPor = User.Identity.Name
+                    stackTrace = ex.StackTrace.ToString(),
+                    activadoPor = User.Identity.Name,
+                    datosPosteriores = JsonSerializer.Serialize(model) //para ver qué datos se intentaron guardar
                 };
                 int logResult = await _eventLogAddBL.Add(log);
                 if (Request.IsAjaxRequest())
@@ -138,6 +143,8 @@ namespace SAMDesign.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ProductsDTO model, HttpPostedFileBase ImageFile)
         {
+
+            ProductsDTO product = _productsDetails_BL.Get(model.ProductID);
             try
             {
                 if (!ModelState.IsValid)
@@ -160,12 +167,24 @@ namespace SAMDesign.UI.Controllers
 
                 if (result > 0)
                 {
+                    EventLogDTO log = new EventLogDTO
+                    {
+                        EventTable = "Products",
+                        TypeEvent = "Edit",
+                        descripcionDeEvento = $"Producto editado: {model.ProductName}",
+                        fechaDeEvento = DateTime.Now,
+                        stackTrace = "Products/Edit/success",
+                        activadoPor = User.Identity.Name,
+                        datosAnteriores = JsonSerializer.Serialize(product),
+                        datosPosteriores = JsonSerializer.Serialize(model)
+                    };
+                    int logResult = await _eventLogAddBL.Add(log);
                     if (Request.IsAjaxRequest())
-                        return Json(new { success = true });
+                        return Json(new { success = true , rows = result });
                     return RedirectToAction("ListAdmin");
                 }
 
-                ModelState.AddModelError(string.Empty, "Error al crear el producto.");
+                ModelState.AddModelError(string.Empty, "Error al editar el producto.");
                 return RedirectToAction("Edit", model);
 
             }
@@ -173,8 +192,21 @@ namespace SAMDesign.UI.Controllers
             {
                 var msg = ex.GetBaseException().Message;
                 ModelState.AddModelError("", "Error al editar el producto. " + msg);
+
+                EventLogDTO log = new EventLogDTO
+                {
+                    EventTable = "Products",
+                    TypeEvent = "Edit/Error",
+                    descripcionDeEvento = $"Producto NO editado: {model.ProductName}",
+                    fechaDeEvento = DateTime.Now,
+                    stackTrace = ex.StackTrace.ToString(),
+                    activadoPor = User.Identity.Name,
+                    datosAnteriores = JsonSerializer.Serialize(product), // datos antes de la edición
+                    datosPosteriores = JsonSerializer.Serialize(model) //para ver qué datos se intentaron guardar
+                };
+                int logResult = await _eventLogAddBL.Add(log);
                 if (Request.IsAjaxRequest())
-                    return Json(new { success = false, error = msg });
+                    return Json(new { success = false, rows = model });
                 return RedirectToAction("Edit", model);
             }
         }
