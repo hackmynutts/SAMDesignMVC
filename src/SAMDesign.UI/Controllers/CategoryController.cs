@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SAMDesign.Abstractions.BusinessLogic.CATEGORY.List;
+using SAMDesign.Abstractions.UIModules;
+using SAMDesign.BusinessLogic.CATEGORY.List;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +11,16 @@ namespace SAMDesign.UI.Controllers
 {
     public class CategoryController : Controller
     {
+        private readonly ICategoryList_BL _categoryListBL;
+        public CategoryController() 
+        {
+            _categoryListBL = new CategoryList_BL();
+        }
         // GET: Category
         public ActionResult List()
         {
-            return PartialView();
+            List<CategoryDTO> categories = _categoryListBL.List();
+            return PartialView(categories);
         }
 
         // GET: Category/Details/5

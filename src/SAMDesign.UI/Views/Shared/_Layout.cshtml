@@ -114,8 +114,7 @@
                                                     "List",
                                                     "Category",
                                                     null,
-                                                    new { @class = "dropdown-item nav-link text-black", 
-                                                            @data_bs_toggle = "modal", @data_bs_target = "#staticBackdrop" }
+                                                    new { @class = "dropdown-item nav-link text-black CategoryList" }
                                                 )
                                             </li>
                                             @* aquí metés más opciones del submenú si querés *@
@@ -154,7 +153,7 @@
     @Scripts.Render("~/bundles/jquery")
 
     <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
-
+    <script src="~/Scripts/CategoryType/Category.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/DataTable/dataTables.min.js"></script>
     <script src="~/Scripts/SweetAlert/sweetalert2@11.js"></script>
@@ -168,11 +167,11 @@
 @*List MODAL CATEGORIES*@
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdropCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropCategoryLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropCategoryLabel">Lista de categorias</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
