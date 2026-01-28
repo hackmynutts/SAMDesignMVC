@@ -9,6 +9,8 @@
     --fuentePrincipal: 'Candara';
 }
 
+
+
 html {
     box-sizing: border-box;
     /*font-size: 62.5%;    /*para que 1rem sea igual a 10px*/
@@ -184,6 +186,62 @@ h3 {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+.modal-backdrop.backdrop-add.show {
+    opacity: .85;
+}
+
+#staticBackdropCategoryList {
+    z-index: 1055 !important;
+}
+
+#staticBackdropAddModal {
+    z-index: 1075 !important;
+}
+
+.modal-backdrop.backdrop-add {
+    z-index: 1070 !important;
+}
+
+    /* que el backdrop sea como Swal */
+    .modal-backdrop.backdrop-add.show {
+        opacity: .65;
+    }
+
+/* centrar y darle look de tarjeta */
+#staticBackdropAddModal .modal-dialog {
+    max-width: 520px;
+}
+
+#staticBackdropAddModal .modal-content {
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.25);
+}
+
+/* header tipo Swal */
+#staticBackdropAddModal .modal-header {
+    border-bottom: 0;
+    padding: 1.25rem 1.25rem 0.75rem;
+}
+
+#staticBackdropAddModal .modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* body spacing */
+#staticBackdropAddModal .modal-body {
+    padding: 0.75rem 1.25rem 1.25rem;
+}
+
+/* footer como botones Swal */
+#staticBackdropAddModal .modal-footer {
+    border-top: 0;
+    padding: 0 1.25rem 1.25rem;
+    gap: .5rem;
+}
+
 
 
 /*productos*/
@@ -692,6 +750,10 @@ ul {
     .factura-content-final {
         margin-left: 100px;
     }
+}
+
+.swal2-container {
+    z-index: 20000 !important;
 }
 
 

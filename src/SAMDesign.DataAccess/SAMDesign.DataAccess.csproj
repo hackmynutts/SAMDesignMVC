@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CATEGORY\Add\CategoryAdd_DA.cs" />
     <Compile Include="CATEGORY\List\CategoryList_DA.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Entities\CategoryDA.cs" />
@@ -75,7 +76,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CATEGORY\Add\" />
     <Folder Include="CATEGORY\Edit\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

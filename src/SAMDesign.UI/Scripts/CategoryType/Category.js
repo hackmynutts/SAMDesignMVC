@@ -1,11 +1,4 @@
-﻿//$(function () {
-//    const table = $('#categoryTable').DataTable({
-//        responsive: true,
-//        autoWidth: false
-//    });
-//});
-
-function showLoadingSwal(message = "Cargando...") {
+﻿function showLoadingSwal(message = "Cargando...") {
     Swal.fire({
         title: message,
         allowOutsideClick: false,
@@ -16,6 +9,7 @@ function showLoadingSwal(message = "Cargando...") {
     });
 }
 
+// Cargar lista de categorias en modal
 $(document).on('click', '.CategoryList', function (e) {
     e.preventDefault();
     showLoadingSwal("Cargando lista de categorias...");
@@ -25,7 +19,7 @@ $(document).on('click', '.CategoryList', function (e) {
         success: function (html) {
             Swal.close();
 
-            const $modal = $('#staticBackdropCategory');
+            const $modal = $('#staticBackdropCategoryList');
             $modal.find('.modal-body').html(html);
 
             // Mostrar modal
@@ -33,10 +27,11 @@ $(document).on('click', '.CategoryList', function (e) {
             modal.show();
 
             //datatable load
-            const table = $('#categoryTable').DataTable({
-                responsive: true,
-                autoWidth: false
-            });
+            if ($.fn.DataTable.isDataTable('#categoryTable')) {
+                $('#categoryTable').DataTable().destroy();
+            }
+            $('#categoryTable').DataTable({ responsive: true, autoWidth: false });
+
         },
         error: function () {
             Swal.fire({
@@ -47,3 +42,102 @@ $(document).on('click', '.CategoryList', function (e) {
         }
     });
 });
+
+// UNA sola vez
+$('#staticBackdropAddModal').on('shown.bs.modal', function () {
+    $('.modal-backdrop').last().addClass('backdrop-add');
+});
+
+$('#staticBackdropAddModal').on('hidden.bs.modal', function () {
+    $('.modal-backdrop.backdrop-add').removeClass('backdrop-add');
+});
+
+
+// Add modal category load
+$(document).on('click', '.AddCategory', function (e) {
+    e.preventDefault();
+    showLoadingSwal("Cargando formulario de categoria...");
+
+    $.ajax({
+        url: '/Category/Create',
+        type: 'GET',
+        success: function (html) {
+            Swal.close();
+            const $modal = $('#staticBackdropAddModal');
+            $modal.find('.modal-body').html(html);
+            // Mostrar modal
+            const modal = new bootstrap.Modal($modal[0]);
+            modal.show();
+        },
+        error: function () {
+            Swal.fire({
+                title: "Oops!",
+                text: "No podemos cargar el formulario de categoria!",
+                icon: "error"
+            }).then(() => location.reload());
+        }
+    });
+});
+
+// Reload list
+function reloadCategoryList() {
+    return $.ajax({
+        url: '/Category/List',
+        type: 'GET',
+        success: function (html) {
+            const $listModal = $('#staticBackdropCategoryList');
+            $listModal.find('.modal-body').html(html);
+
+            if ($.fn.DataTable.isDataTable('#categoryTable')) {
+                $('#categoryTable').DataTable().destroy();
+            }
+            $('#categoryTable').DataTable({
+                responsive: true,
+                autoWidth: false
+            });
+        }
+    });
+}
+
+// submit create form 
+$(document).on('click', '.submitCategory', function (e) {
+    e.preventDefault();
+    const $addModal = $('#staticBackdropAddModal');
+    const $form = $addModal.find('form');
+        $.ajax({
+            url: '/Category/Create',
+            type: 'POST',
+            data: $form.serialize(),
+            dataType: 'json',
+            success: async function(data) {
+                Swal.close();
+                if (data.success && data.rows > 0) {
+                    Swal.fire({
+                        title: "Excelente!",
+                        text: "Categoría creada exitosamente!",
+                        icon: "success"
+                    }).then(async () => {
+                        //cerrar modal Crear
+                        bootstrap.Modal.getInstance($addModal[0]).hide();
+                        // recargar lista sin refresh
+                        await reloadCategoryList();
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: data.message || "No se pudo crear la categoría.",
+                        icon: "warning"
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    title: "Oops!",
+                    text: "No podemos crear la categoria!",
+                    icon: "error"
+                }).then(() => {
+                    location.reload();
+                });
+            }
+        });
+    });

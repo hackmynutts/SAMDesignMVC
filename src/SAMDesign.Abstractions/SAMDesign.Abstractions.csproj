@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\CATEGORY\Add\ICategoryAdd_BL.cs" />
     <Compile Include="BusinessLogic\CATEGORY\List\ICategoryList_BL.cs" />
     <Compile Include="BusinessLogic\EVENTLOGS\Add\IEventLogAdd_BL.cs" />
     <Compile Include="BusinessLogic\EVENTLOGS\List\IEventLogList_BL.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="BusinessLogic\PRODUCTS\Details\IProductDetails_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\Edit\IProductEdit_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\List\IProductsList_BL.cs" />
+    <Compile Include="DataAccess\CATEGORY\Add\ICategoryAdd_DA.cs" />
     <Compile Include="DataAccess\CATEGORY\List\ICategoryList_DA.cs" />
     <Compile Include="DataAccess\EVENTLOG\Add\IEventLogAdd_DA.cs" />
     <Compile Include="DataAccess\EVENTLOG\List\IEventLogList_DA.cs" />
@@ -63,9 +65,7 @@
     <Compile Include="UIModules\ProductsDTO.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BusinessLogic\CATEGORY\Add\" />
     <Folder Include="BusinessLogic\CATEGORY\Edit\" />
-    <Folder Include="DataAccess\CATEGORY\Add\" />
     <Folder Include="DataAccess\CATEGORY\Edit\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

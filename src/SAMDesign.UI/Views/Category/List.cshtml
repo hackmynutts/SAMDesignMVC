@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<SAMDesign.Abstractions.UIModules.CategoryDTO>
 
 <p>
-    @Html.ActionLink("+", "Create")
+    @Html.ActionLink("+",
+                    "Create",
+                    "Category",
+                    null,
+                    new { @class = "AddCategory" })
 </p>
 <div class="table-responsive">
     <table class="table" id="categoryTable">
@@ -58,7 +62,7 @@
                         @Html.DisplayFor(modelItem => item.updatedOn)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id=item.categoryID }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.categoryID }) |
                         @Html.ActionLink("Delete", "Delete", new { id = item.categoryID })
                     </td>
                 </tr>
@@ -66,3 +70,4 @@
         </tbody>
     </table>
 </div>
+
