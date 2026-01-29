@@ -213,3 +213,53 @@ $(document).on('click', '.submitEditCategory', function (e) {
         }
     });
 });
+
+// Delete category
+$(document).on('click', '.DeleteCategory', function (e) {
+    e.preventDefault();
+
+    const id = $(this).data('id');
+    const url = `/Category/Delete/${id}`;
+
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "La categoría será eliminada.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Sí, ELIMINAR",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            showLoadingSwal("Inactivando categoría...");
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "json",
+                success: async function (data) {
+                    Swal.close();
+                    if (data.success) {
+                        Swal.fire({
+                            title: "Listo!",
+                            text: "Categoría inactivada correctamente.",
+                            icon: "success"
+                        });
+                        await reloadCategoryList();
+
+                    } else {
+                        Swal.fire("Oops!", data.message || "No se pudo inactivar.", "error");
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                    Swal.fire("Error", "Error en el servidor.", "error");
+                }
+            });
+        }
+    });
+});

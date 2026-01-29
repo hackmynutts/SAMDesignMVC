@@ -94,7 +94,7 @@ namespace SAMDesign.UI.Controllers
                 {
                     EventLogDTO log = new EventLogDTO
                     {
-                        EventTable = "Products", 
+                        EventTable = "Products",
                         TypeEvent = "Create",
                         descripcionDeEvento = $"Producto creado: {model.ProductName}",
                         fechaDeEvento = _date.GetDate(),
@@ -188,7 +188,7 @@ namespace SAMDesign.UI.Controllers
                     };
                     int logResult = await _eventLogAddBL.Add(log);
                     if (Request.IsAjaxRequest())
-                        return Json(new { success = true , rows = result });
+                        return Json(new { success = true, rows = result });
                     return RedirectToAction("ListAdmin");
                 }
 
@@ -216,6 +216,57 @@ namespace SAMDesign.UI.Controllers
                 if (Request.IsAjaxRequest())
                     return Json(new { success = false, rows = model });
                 return RedirectToAction("Edit", model);
+            }
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                ProductsDTO productPrev = _productsDetails_BL.Get(id);
+                ProductsDTO product = _productsDetails_BL.Get(id);
+                product.modified_by = User.Identity.Name;
+                product.statusID = 14; //soft delete
+                int result = _productEdit_BL.Edit(product).Result;
+                if (result > 0)
+                {
+                    EventLogDTO log = new EventLogDTO
+                    {
+                        EventTable = "Products",
+                        TypeEvent = "Delete",
+                        descripcionDeEvento = $"Producto eliminado: {product.ProductName}",
+                        fechaDeEvento = _date.GetDate(),
+                        stackTrace = "Products/Delete/success",
+                        activadoPor = User.Identity.Name,
+                        datosAnteriores = JsonSerializer.Serialize(productPrev),
+                        datosPosteriores = JsonSerializer.Serialize(product)
+                    };
+                    int logResult = _eventLogAddBL.Add(log).Result;
+                    return RedirectToAction("ListAdmin");
+                }
+                ModelState.AddModelError(string.Empty, "Error al eliminar el producto.");
+                return RedirectToAction("ListAdmin");
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.GetBaseException().Message;
+                ModelState.AddModelError("", "Error al eliminar el producto. " + msg);
+                EventLogDTO log = new EventLogDTO
+                {
+                    EventTable = "Products",
+                    TypeEvent = "Delete/Error",
+                    descripcionDeEvento = $"Producto NO eliminado: ID {id}",
+                    fechaDeEvento = _date.GetDate(),
+                    stackTrace = ex.StackTrace
+                };
+                int logResult = _eventLogAddBL.Add(log).Result;
+                if (Request.IsAjaxRequest())
+                    return Json(new { success = false });
+                return RedirectToAction("Edit");
+
             }
         }
     }

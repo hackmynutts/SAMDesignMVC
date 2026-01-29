@@ -18,6 +18,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using static System.Data.Entity.Infrastructure.Design.Executor;
 
 namespace SAMDesign.UI.Controllers
 {
@@ -29,7 +30,7 @@ namespace SAMDesign.UI.Controllers
         private readonly ICategoryDetails_BL _categoryDetailsBL;
         private readonly ICategoryEdit_BL _categoryEditBL;
         private readonly ICategoryList_BL _categoryListBL;
-        public CategoryController() 
+        public CategoryController()
         {
             idate = new date();
             _eventLogAddBL = new EventLogAdd_BL();
@@ -63,7 +64,7 @@ namespace SAMDesign.UI.Controllers
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     if (Request.IsAjaxRequest())
                         return Json(new { success = false, message = "Validación inválida." });
@@ -191,6 +192,63 @@ namespace SAMDesign.UI.Controllers
                 if (Request.IsAjaxRequest())
                     return Json(new { success = false, message = msg });
                 return PartialView("Edit", category);
+            }
+        }
+
+        // POST: Category/Delete/5
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                CategoryDTO categoryPrev = _categoryDetailsBL.Get(id);
+                CategoryDTO category = _categoryDetailsBL.Get(id);
+                category.updatedBy = User.Identity.Name;
+                category.status = 14; //soft delete
+                int result = await _categoryEditBL.Edit(category);
+                if (result > 0)
+                {
+                    EventLogDTO log = new EventLogDTO
+                    {
+                        EventTable = "Categoria",
+                        TypeEvent = "Delete",
+                        descripcionDeEvento = $"Categoria eliminado: {category.categoryName}",
+                        fechaDeEvento = idate.GetDate(),
+                        stackTrace = "Categoria/Delete/success",
+                        activadoPor = User.Identity.Name,
+                        datosAnteriores = JsonSerializer.Serialize(categoryPrev),
+                        datosPosteriores = JsonSerializer.Serialize(category)
+                    };
+                    int logResult = await _eventLogAddBL.Add(log);
+                    if (Request.IsAjaxRequest())
+                        return Json(new { success = true, rows = result });
+
+                    //SI NO ES AJAX: redirect normal
+                    return RedirectToAction("Lista");
+                }
+
+                if (Request.IsAjaxRequest())
+                    return Json(new { success = false, message = "No se pudo eliminar/inactivar." });
+
+                return RedirectToAction("Lista");
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.GetBaseException().Message;
+                ModelState.AddModelError("", "Error al eliminar la categoria." + msg);
+                EventLogDTO log = new EventLogDTO
+                {
+                    EventTable = "Category",
+                    TypeEvent = "Delete/Error",
+                    descripcionDeEvento = $"Categoria NO eliminado: ID {id}",
+                    fechaDeEvento = idate.GetDate(),
+                    stackTrace = ex.StackTrace
+                };
+                int logResult = await _eventLogAddBL.Add(log);
+                if (Request.IsAjaxRequest())
+                    return Json(new { success = false });
+                return RedirectToAction("Edit");
+
             }
         }
     }
