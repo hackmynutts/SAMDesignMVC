@@ -26,12 +26,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.createdOn)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.updatedBy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.updatedOn)
-                </th>
                 <th></th>
             </tr>
         </thead>
@@ -47,7 +41,14 @@
                         @Html.DisplayFor(modelItem => item.categoryDescription)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.status)
+                        @if (item.status == 13)
+                        {
+                            <span class="badge bg-success">Activo</span>
+                        }
+                        else if (item.status == 14)
+                        {
+                            <span class="badge bg-danger">Inactivo</span>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.createdBy)
@@ -56,14 +57,20 @@
                         @Html.DisplayFor(modelItem => item.createdOn)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.updatedBy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.updatedOn)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.categoryID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.categoryID })
+                        @*El url se puede usar razon con el helper de Url.Action*@
+                       <a href="#"
+                           data-id="@item.categoryID"
+                           class="btn btn-sm btn-outline-primary EditCategory"
+                           title="Editar">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        |
+                        <a href="#"
+                           data-id="@item.categoryID"
+                           class="btn btn-sm btn-outline-danger DeleteCategory"
+                           title="Eliminar">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </a>
                     </td>
                 </tr>
             }

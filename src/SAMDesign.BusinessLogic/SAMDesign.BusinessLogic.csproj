@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CATEGORY\Add\CategoryAdd_BL.cs" />
+    <Compile Include="CATEGORY\Details\CategoryDetails_BL.cs" />
+    <Compile Include="CATEGORY\Edit\CategoryEdit_BL.cs" />
     <Compile Include="CATEGORY\List\CategoryList_BL.cs" />
     <Compile Include="EVENTLOG\Add\EventLogAdd_BL.cs" />
     <Compile Include="EVENTLOG\List\EventLogList_BL.cs" />
@@ -63,8 +65,6 @@
       <Name>SAMDesign.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CATEGORY\Edit\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

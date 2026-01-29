@@ -3,8 +3,10 @@ using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Add;
 using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Details;
 using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.Edit;
 using SAMDesign.Abstractions.BusinessLogic.PRODUCTS.List;
+using SAMDesign.Abstractions.general.DateManagement;
 using SAMDesign.Abstractions.UIModules;
 using SAMDesign.BusinessLogic.EVENTLOG.Add;
+using SAMDesign.BusinessLogic.general.DateManagement;
 using SAMDesign.BusinessLogic.PRODUCTS.Add;
 using SAMDesign.BusinessLogic.PRODUCTS.Details;
 using SAMDesign.BusinessLogic.PRODUCTS.Edit;
@@ -22,6 +24,7 @@ namespace SAMDesign.UI.Controllers
 {
     public class ProductsController : Controller
     {
+        private readonly Idate _date;
         private IEventLogAdd_BL _eventLogAddBL;
         private IProductAdd_BL _productAdd_BL;
         private IProductsList_BL _productsList_BL;
@@ -29,6 +32,7 @@ namespace SAMDesign.UI.Controllers
         private IProductEdit_BL _productEdit_BL;
         public ProductsController()
         {
+            _date = new date();
             _eventLogAddBL = new EventLogAdd_BL();
             _productAdd_BL = new ProductAdd_BL();
             _productEdit_BL = new ProductEdit_BL();
@@ -93,7 +97,7 @@ namespace SAMDesign.UI.Controllers
                         EventTable = "Products", 
                         TypeEvent = "Create",
                         descripcionDeEvento = $"Producto creado: {model.ProductName}",
-                        fechaDeEvento = DateTime.Now,
+                        fechaDeEvento = _date.GetDate(),
                         stackTrace = "Products/Create/success",
                         activadoPor = User.Identity.Name,
                         datosPosteriores = JsonSerializer.Serialize(model)
@@ -118,7 +122,7 @@ namespace SAMDesign.UI.Controllers
                     EventTable = "Products",
                     TypeEvent = "Create/Error",
                     descripcionDeEvento = $"Producto NO creado: {model.ProductName}",
-                    fechaDeEvento = DateTime.Now,
+                    fechaDeEvento = _date.GetDate(),
                     stackTrace = ex.StackTrace.ToString(),
                     activadoPor = User.Identity.Name,
                     datosPosteriores = JsonSerializer.Serialize(model) //para ver qué datos se intentaron guardar
@@ -162,6 +166,10 @@ namespace SAMDesign.UI.Controllers
 
                     model.img_path = "/Content/Images/Products/" + fileName; //guardar la ruta relativa en el modelo
                 }
+                if (model.img_path == null)
+                {
+                    model.img_path = product.img_path; // Mantener la imagen existente si no se sube una nueva
+                }
                 model.modified_by = User.Identity.Name;
                 int result = await _productEdit_BL.Edit(model);
 
@@ -172,7 +180,7 @@ namespace SAMDesign.UI.Controllers
                         EventTable = "Products",
                         TypeEvent = "Edit",
                         descripcionDeEvento = $"Producto editado: {model.ProductName}",
-                        fechaDeEvento = DateTime.Now,
+                        fechaDeEvento = _date.GetDate(),
                         stackTrace = "Products/Edit/success",
                         activadoPor = User.Identity.Name,
                         datosAnteriores = JsonSerializer.Serialize(product),
@@ -198,7 +206,7 @@ namespace SAMDesign.UI.Controllers
                     EventTable = "Products",
                     TypeEvent = "Edit/Error",
                     descripcionDeEvento = $"Producto NO editado: {model.ProductName}",
-                    fechaDeEvento = DateTime.Now,
+                    fechaDeEvento = _date.GetDate(),
                     stackTrace = ex.StackTrace.ToString(),
                     activadoPor = User.Identity.Name,
                     datosAnteriores = JsonSerializer.Serialize(product), // datos antes de la edición
