@@ -19,8 +19,8 @@ namespace SAMDesign.Abstractions.UIModules
         [Display(Name = "Creado el")]
         public DateTime createdOn{ get; set; }
         [Display(Name ="Modificado por")]
-        public string modifiedOn{ get; set; }
+        public string modifiedBy{ get; set; }
         [Display(Name ="Modificado en")]
-        public DateTime? modifiedBy { get; set; }
+        public DateTime? modifiedOn { get; set; }
     }
 }

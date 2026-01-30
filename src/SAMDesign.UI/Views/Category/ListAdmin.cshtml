@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<SAMDesign.Abstractions.UIModules.CategoryDTO>
-
 <div class="table-responsive">
     <table class="table" id="categoryTable">
         <thead>
@@ -13,11 +12,23 @@
                 <th>
                     @Html.DisplayNameFor(model => model.status)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.createdBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.createdOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.updatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.updatedOn)
+                </th>
                 <th></th>
             </tr>
         </thead>
-
         <tbody>
+
             @foreach (var item in Model)
             {
                 <tr>
@@ -62,9 +73,19 @@
                             @statusName
                         </span>
                     </td>
-
                     <td>
-                        @*El url se puede usar razon con el helper de Url.Action*@
+                        @Html.DisplayFor(modelItem => item.createdBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.createdOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.updatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.updatedOn)
+                    </td>
+                    <td>
                         <a href="#"
                            data-id="@item.categoryID"
                            class="btn btn-sm btn-outline-primary EditCategory"
@@ -84,4 +105,3 @@
         </tbody>
     </table>
 </div>
-

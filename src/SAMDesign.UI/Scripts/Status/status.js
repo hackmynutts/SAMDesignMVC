@@ -42,3 +42,77 @@ $(document).on('click', '.StatusList', function (e) {
         }
     });
 });
+
+
+
+// Edit modal status load
+$(document).on('click', '.EditStatus', function (e) {
+    e.preventDefault();
+    showLoadingSwal("Cargando formulario de estado...");
+
+    const id = $(this).data('id');
+    const url = `/Status/Edit/${id}`;
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (html) {
+            Swal.close();
+            const $modal = $('#staticBackdropStatusEditModal');
+            $modal.find('.modal-body').html(html);
+            // Mostrar modal
+            const modal = new bootstrap.Modal($modal[0]);
+            modal.show();
+        },
+        error: function () {
+            Swal.fire({
+                title: "Oops!",
+                text: "No podemos cargar el formulario de estados!",
+                icon: "error"
+            }).then(() => location.reload());
+        }
+    });
+});
+
+// submit edit form 
+$(document).on('click', '.submitEditStatus', function (e) {
+    e.preventDefault();
+    const $addModal = $('#staticBackdropStatusEditModal');
+    const $form = $addModal.find('form');
+    $.ajax({
+        url: '/Status/Edit',
+        type: 'POST',
+        data: $form.serialize(),
+        dataType: 'json',
+        success: async function (data) {
+            Swal.close();
+            if (data.success && data.rows > 0) {
+                Swal.fire({
+                    title: "Excelente!",
+                    text: "Estado editado exitosamente!",
+                    icon: "success"
+                }).then(async () => {
+                    //cerrar modal Crear
+                    bootstrap.Modal.getInstance($addModal[0]).hide();
+                    // recargar lista sin refresh
+                    await reloadCategoryList();
+                });
+            } else {
+                Swal.fire({
+                    title: "Oops!",
+                    text: data.message || "No se pudo editar el estado.",
+                    icon: "warning"
+                });
+            }
+        },
+        error: function () {
+            Swal.fire({
+                title: "Oops!",
+                text: "No podemos editar el estado!",
+                icon: "error"
+            }).then(() => {
+                location.reload();
+            });
+        }
+    });
+});

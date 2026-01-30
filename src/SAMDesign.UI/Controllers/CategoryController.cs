@@ -3,6 +3,7 @@ using SAMDesign.Abstractions.BusinessLogic.CATEGORY.Details;
 using SAMDesign.Abstractions.BusinessLogic.CATEGORY.Edit;
 using SAMDesign.Abstractions.BusinessLogic.CATEGORY.List;
 using SAMDesign.Abstractions.BusinessLogic.EVENTLOGS.Add;
+using SAMDesign.Abstractions.BusinessLogic.STATUS.List;
 using SAMDesign.Abstractions.general.DateManagement;
 using SAMDesign.Abstractions.UIModules;
 using SAMDesign.BusinessLogic.CATEGORY.Add;
@@ -11,6 +12,7 @@ using SAMDesign.BusinessLogic.CATEGORY.Edit;
 using SAMDesign.BusinessLogic.CATEGORY.List;
 using SAMDesign.BusinessLogic.EVENTLOG.Add;
 using SAMDesign.BusinessLogic.general.DateManagement;
+using SAMDesign.BusinessLogic.STATUS.List;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,7 @@ namespace SAMDesign.UI.Controllers
     public class CategoryController : Controller
     {
         private readonly Idate idate;
+        private readonly IStatusList_BL _statuslistBL;
         private readonly IEventLogAdd_BL _eventLogAddBL;
         private readonly ICategoryAdd_BL _categoryAddBL;
         private readonly ICategoryDetails_BL _categoryDetailsBL;
@@ -33,6 +36,7 @@ namespace SAMDesign.UI.Controllers
         public CategoryController()
         {
             idate = new date();
+            _statuslistBL = new StatusList_BL();
             _eventLogAddBL = new EventLogAdd_BL();
             _categoryAddBL = new CategoryAdd_BL();
             _categoryDetailsBL = new CategoryDetails_BL();
@@ -43,6 +47,9 @@ namespace SAMDesign.UI.Controllers
         public ActionResult List()
         {
             List<CategoryDTO> categories = _categoryListBL.ListActive();
+
+            var statuses = _statuslistBL.List();
+            ViewBag.StatusDict = statuses.ToDictionary(s => s.statusID, s => s.name);
             return PartialView(categories);
         }
 
@@ -50,6 +57,9 @@ namespace SAMDesign.UI.Controllers
         public ActionResult ListAdmin()
         {
             List<CategoryDTO> categories = _categoryListBL.List();
+
+            var statuses = _statuslistBL.List();
+            ViewBag.StatusDict = statuses.ToDictionary(s => s.statusID, s => s.name);
             return PartialView(categories);
         }
 
@@ -134,6 +144,21 @@ namespace SAMDesign.UI.Controllers
         public ActionResult Edit(int id)
         {
             CategoryDTO category = _categoryDetailsBL.Get(id);
+            //1. obtener la lista de status
+            List<StatusDTO> statuses = _statuslistBL.List();
+            // 2. Convertir a SelectListItems
+            List<SelectListItem> statusSelect = new List<SelectListItem>();
+            foreach (StatusDTO s in statuses)
+            {
+                SelectListItem item = new SelectListItem();
+                item.Value = s.statusID.ToString();
+                item.Text = s.name;
+
+                statusSelect.Add(item);
+            }
+
+            // 3. Enviar a la vista
+            ViewBag.Status = statusSelect;
             return PartialView(category);
         }
 
@@ -174,10 +199,10 @@ namespace SAMDesign.UI.Controllers
                     return RedirectToAction("List");
                 }
                 if (Request.IsAjaxRequest())
-                    return Json(new { success = false, message = "Error al crear la categoria." });
+                    return Json(new { success = false, message = "Error al editar la categoria." });
 
-                ModelState.AddModelError(string.Empty, "Error al crear la categoria.");
-                return PartialView("Create", category);
+                ModelState.AddModelError(string.Empty, "Error al editar la categoria.");
+                return PartialView("Edit", category);
             }
             catch (Exception e)
             {

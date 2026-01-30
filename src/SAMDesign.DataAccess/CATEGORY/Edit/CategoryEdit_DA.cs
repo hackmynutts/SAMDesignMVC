@@ -29,7 +29,7 @@ namespace SAMDesign.DataAccess.CATEGORY.Edit
                 da.categoryDescription = category.categoryDescription;
                 da.status = category.status;
                 da.updatedBy = category.updatedBy;
-                da.updatedOn = DateTime.Now;
+                da.updatedOn = category.updatedOn;
                 cant = await _context.SaveChangesAsync();
             }
                 return cant;

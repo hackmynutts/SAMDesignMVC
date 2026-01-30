@@ -79,11 +79,11 @@ $(document).on('click', '.CategoryListAdmin', function (e) {
 
 
 // UNA sola vez
-$('#staticBackdropAddModal').on('shown.bs.modal', function () {
+$('#staticBackdropCategoryAddModal').on('shown.bs.modal', function () {
     $('.modal-backdrop').last().addClass('backdrop-add');
 });
 
-$('#staticBackdropAddModal').on('hidden.bs.modal', function () {
+$('#staticBackdropCategoryAddModal').on('hidden.bs.modal', function () {
     $('.modal-backdrop.backdrop-add').removeClass('backdrop-add');
 });
 
@@ -98,7 +98,7 @@ $(document).on('click', '.AddCategory', function (e) {
         type: 'GET',
         success: function (html) {
             Swal.close();
-            const $modal = $('#staticBackdropAddModal');
+            const $modal = $('#staticBackdropCategoryAddModal');
             $modal.find('.modal-body').html(html);
             // Mostrar modal
             const modal = new bootstrap.Modal($modal[0]);
@@ -137,7 +137,7 @@ function reloadCategoryList() {
 // submit create form 
 $(document).on('click', '.submitCategory', function (e) {
     e.preventDefault();
-    const $addModal = $('#staticBackdropAddModal');
+    const $addModal = $('#staticBackdropCategoryAddModal');
     const $form = $addModal.find('form');
         $.ajax({
             url: '/Category/Create',
@@ -190,7 +190,7 @@ $(document).on('click', '.EditCategory', function (e) {
         type: 'GET',
         success: function (html) {
             Swal.close();
-            const $modal = $('#staticBackdropEditModal');
+            const $modal = $('#staticBackdropCategoryEditModal');
             $modal.find('.modal-body').html(html);
             // Mostrar modal
             const modal = new bootstrap.Modal($modal[0]);
@@ -209,7 +209,7 @@ $(document).on('click', '.EditCategory', function (e) {
 // submit edit form 
 $(document).on('click', '.submitEditCategory', function (e) {
     e.preventDefault();
-    const $addModal = $('#staticBackdropEditModal');
+    const $addModal = $('#staticBackdropCategoryEditModal');
     const $form = $addModal.find('form');
     $.ajax({
         url: '/Category/Edit',

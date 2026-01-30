@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<SAMDesign.Abstractions.UIModules.StatusDTO>
 
-<p>
-    @Html.ActionLink("+", "Create")
-</p>
 <div class="table-responsive">
     <table class="table w-100" id="statusTable">
         <thead>
@@ -52,8 +49,19 @@
                         @Html.DisplayFor(modelItem => item.modifiedBy)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.statusID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.statusID })
+                        <a href="#"
+                           data-id="@item.statusID"
+                           class="btn btn-sm btn-outline-primary EditStatus"
+                           title="Editar">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        |
+                        <a href="#"
+                           data-id="@item.statusID"
+                           class="btn btn-sm btn-outline-danger DeleteStatus"
+                           title="Eliminar">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </a>
                     </td>
                 </tr>
             }

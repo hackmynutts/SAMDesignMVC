@@ -23,8 +23,8 @@ namespace SAMDesign.DataAccess.Entities
         [Column("Created_On")]
         public DateTime createdOn { get; set; }
         [Column("Modified_On")]
-        public string modifiedOn { get; set; }
+        public string modifiedBy { get; set; }
         [Column("Modified_By")]
-        public DateTime? modifiedBy { get; set; }
+        public DateTime? modifiedOn { get; set; }
     }
 }

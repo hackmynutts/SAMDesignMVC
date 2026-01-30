@@ -206,7 +206,14 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropCategoryListLabel">Lista de categorias</h5>
+                <p>
+                    @Html.ActionLink("+",
+                                    "Create",
+                                    "Category",
+                                    null,
+                                    new { @class = "btn btn-md btn-outline-success mx-4 AddCategory" })
+                </p>
+                <h5 class="modal-title align-content-center" id="staticBackdropCategoryListLabel">Lista de categorias</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -220,11 +227,11 @@
 </div>
 
 @* Modal Agregar Categoria *@
-<div class="modal fade" id="staticBackdropAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropAddModalLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdropCategoryAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropCategoryAddModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropAddModalLabel">Agregar categoria</h5>
+                <h5 class="modal-title" id="staticBackdropCategoryAddModalLabel">Agregar categoria</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -240,11 +247,11 @@
 
 
 @* Modal EDITAR Categoria *@
-<div class="modal fade" id="staticBackdropEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropEditModalLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdropCategoryEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropCategoryEditModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropEditModalLabel">Editar categoria</h5>
+                <h5 class="modal-title" id="staticBackdropCategoryEditModalLabel">Editar categoria</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -268,6 +275,13 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
+                <p>
+                    @Html.ActionLink("+",
+                                    "Create",
+                                    "Status",
+                                    null,
+                                    new { @class = "btn btn-md btn-outline-success mx-4 AddStatus" })
+                </p>
                 <h5 class="modal-title" id="staticBackdropStatusListLabel">Lista de estados</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -281,5 +295,23 @@
     </div>
 </div>
 
+@* Modal EDITAR status *@
+<div class="modal fade" id="staticBackdropStatusEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropStatusEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropStatusEditModalLabel">Editar estado</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary submitEditStatus">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @*END section STATUS*@
