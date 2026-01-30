@@ -124,13 +124,29 @@
                                     <a class="dropdown-item nav-link text-black" href="../../src/admin/Inventario.php">INVENTARIO</a>
                                     <a class="dropdown-item nav-link text-black" href="../../src/admin/adminOrdenes.php">ORDENES</a>
                                     <a class="dropdown-item nav-link text-black" href="../../src/admin/adminBilling.php">FACTURAS</a>
-                                    @Html.ActionLink(
-                                          "Event Logs",
-                                          "ListLogs",
-                                          "EventLog",
-                                          null,
-                                          new { @class = "dropdown-item nav-link text-black" }
-                                      )
+                                    <div>
+                                        <div class="dropend d-flex align-items-center">
+                                            <a class="dropdown-item nav-link text-black" href="#">IT</a>
+                                            <button class="btn btn-link dropdown-toggle dropdown-toggle-split px-2"
+                                                    type="button"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                            </button>
+
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    @Html.ActionLink(
+                                                          "Event Logs",
+                                                          "ListLogs",
+                                                          "EventLog",
+                                                          null,
+                                                          new { @class = "dropdown-item nav-link text-black" }
+                                                      )
+                                                </li>
+                                                @* aquí metés más opciones del submenú si querés *@
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </li>
