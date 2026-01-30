@@ -16,10 +16,13 @@ namespace SAMDesign.DataAccess.Entities
         [Column("Product_ID")]
         public int ProductID { get; set; }
         [Column("Description")]
+        [Required(ErrorMessage = "El nombre del producto es requerido.")]
         public string ProductName { get; set; }
         [Column("Category_Type_ID")]
+        [Required(ErrorMessage = "La categoría es requerida.")]
         public int CategoryID { get; set; }
         [Column("Comments")]
+        [Required(ErrorMessage = "La informacion es requeridos.")]
         public string comments { get; set; }
         [Column("Unit_price")]
         public decimal UnitPrice { get; set; }

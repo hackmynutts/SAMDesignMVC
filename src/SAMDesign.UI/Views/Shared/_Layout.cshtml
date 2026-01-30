@@ -136,6 +136,24 @@
                                             <ul class="dropdown-menu">
                                                 <li>
                                                     @Html.ActionLink(
+                                                        "Estados",
+                                                        "List",
+                                                        "Status",
+                                                        null,
+                                                        new { @class = "dropdown-item nav-link text-black StatusList" }
+                                                    )
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink(
+                                                        "Categorias",
+                                                        "List",
+                                                        "Category",
+                                                        null,
+                                                        new { @class = "dropdown-item nav-link text-black CategoryList" }
+                                                    )
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink(
                                                           "Event Logs",
                                                           "ListLogs",
                                                           "EventLog",
@@ -170,6 +188,7 @@
 
     <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
     <script src="~/Scripts/CategoryType/Category.js"></script>
+    <script src="~/Scripts/Status/Status.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/DataTable/dataTables.min.js"></script>
     <script src="~/Scripts/SweetAlert/sweetalert2@11.js"></script>
@@ -178,7 +197,7 @@
 </body>
 </html>
 
-
+@*BEGIN section of category*@
 
 @*List MODAL CATEGORIES*@
 
@@ -199,9 +218,6 @@
         </div>
     </div>
 </div>
-
-@*End List MODAL CATEGORIES*@
-
 
 @* Modal Agregar Categoria *@
 <div class="modal fade" id="staticBackdropAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropAddModalLabel" aria-hidden="true">
@@ -241,3 +257,29 @@
         </div>
     </div>
 </div>
+@*END section of category*@
+
+
+
+@*BEGIN section of STATUS*@
+
+@*List MODAL STATUS*@
+<div class="modal fade" id="staticBackdropStatusList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropStatusListLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropStatusListLabel">Lista de estados</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*END section STATUS*@

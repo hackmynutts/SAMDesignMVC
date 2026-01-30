@@ -24,5 +24,6 @@ namespace SAMDesign.DataAccess
         public DbSet<ProductsDA> Products { get; set; }
         public DbSet<EventLogDA> EventLogs { get; set; }
         public DbSet<CategoryDA> Categories { get; set; }
+        public DbSet<StatusDA> Statuses { get; set; }
     }
 }

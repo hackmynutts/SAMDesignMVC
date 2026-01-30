@@ -238,6 +238,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -544,6 +545,7 @@
     <Content Include="Scripts\Products\Product.js" />
     <Content Include="Scripts\responsive.bootstrap5.js" />
     <Content Include="Scripts\responsive.bootstrap5.min.js" />
+    <Content Include="Scripts\Status\Status.js" />
     <Content Include="Scripts\SweetAlert\sweetalert2%4011.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -588,6 +590,7 @@
     <Content Include="Views\Category\List.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Status\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
