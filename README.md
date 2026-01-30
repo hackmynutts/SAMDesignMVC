@@ -1,2 +1,5 @@
 # SAMDesignMVC
-Repository for project SAM Design for Andres Corredor
+Repository for project WEBSTORE TEMPLATE
+
+
+As this is an ongoing project for ASP.Net 
