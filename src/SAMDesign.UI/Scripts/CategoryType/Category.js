@@ -43,6 +43,41 @@ $(document).on('click', '.CategoryList', function (e) {
     });
 });
 
+// Cargar lista de categorias en modal
+$(document).on('click', '.CategoryListAdmin', function (e) {
+    e.preventDefault();
+    showLoadingSwal("Cargando lista de categorias...");
+    $.ajax({
+        url: '/Category/ListAdmin',
+        type: 'GET',
+        success: function (html) {
+            Swal.close();
+
+            const $modal = $('#staticBackdropCategoryList');
+            $modal.find('.modal-body').html(html);
+
+            // Mostrar modal
+            const modal = new bootstrap.Modal($modal[0]);
+            modal.show();
+
+            //datatable load
+            if ($.fn.DataTable.isDataTable('#categoryTable')) {
+                $('#categoryTable').DataTable().destroy();
+            }
+            $('#categoryTable').DataTable({ responsive: true, autoWidth: false });
+
+        },
+        error: function () {
+            Swal.fire({
+                title: "Oops!",
+                text: "No podemos cargar la lista de categorias!",
+                icon: "error"
+            }).then(() => location.reload());
+        }
+    });
+});
+
+
 // UNA sola vez
 $('#staticBackdropAddModal').on('shown.bs.modal', function () {
     $('.modal-backdrop').last().addClass('backdrop-add');

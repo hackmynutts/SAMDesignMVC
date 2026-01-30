@@ -23,6 +23,11 @@ namespace SAMDesign.BusinessLogic.CATEGORY.List
             return _categoryListDA.List();
         }
 
+        public List<CategoryDTO> ListActive()
+        {
+            return _categoryListDA.ListActive();
+        }
+
 
     }
 }

@@ -19,7 +19,6 @@ namespace SAMDesign.DataAccess.CATEGORY.List
         public List<CategoryDTO> List()
         {
             List<CategoryDTO> categories = (from category in _context.Categories
-                                            orderby category.createdOn descending
                                             select new CategoryDTO
                                               {
                                                     categoryID = category.categoryID,
@@ -31,6 +30,25 @@ namespace SAMDesign.DataAccess.CATEGORY.List
                                                     updatedBy = category.updatedBy,
                                                     updatedOn = category.updatedOn
                                               }).ToList();
+            return categories;
+        }
+
+        public List<CategoryDTO> ListActive()
+        {
+            List<CategoryDTO> categories = (from category in _context.Categories
+                                            where category.status == 13
+                                            orderby category.createdOn descending
+                                            select new CategoryDTO
+                                            {
+                                                categoryID = category.categoryID,
+                                                categoryName = category.categoryName,
+                                                categoryDescription = category.categoryDescription,
+                                                status = category.status,
+                                                createdBy = category.createdBy,
+                                                createdOn = category.createdOn,
+                                                updatedBy = category.updatedBy,
+                                                updatedOn = category.updatedOn
+                                            }).ToList();
             return categories;
         }
     }

@@ -42,6 +42,13 @@ namespace SAMDesign.UI.Controllers
         // GET: Category
         public ActionResult List()
         {
+            List<CategoryDTO> categories = _categoryListBL.ListActive();
+            return PartialView(categories);
+        }
+
+        // GET: Category
+        public ActionResult ListAdmin()
+        {
             List<CategoryDTO> categories = _categoryListBL.List();
             return PartialView(categories);
         }

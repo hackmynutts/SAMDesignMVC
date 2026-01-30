@@ -10,5 +10,6 @@ namespace SAMDesign.Abstractions.DataAccess.CATEGORY.List
     public interface ICategoryList_DA
     {
         List<CategoryDTO> List();
+        List<CategoryDTO> ListActive();
     }
 }

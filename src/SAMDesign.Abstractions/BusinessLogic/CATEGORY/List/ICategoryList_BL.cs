@@ -10,5 +10,6 @@ namespace SAMDesign.Abstractions.BusinessLogic.CATEGORY.List
     public interface ICategoryList_BL
     {
         List<CategoryDTO> List();
+        List<CategoryDTO> ListActive();
     }
 }
