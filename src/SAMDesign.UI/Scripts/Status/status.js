@@ -9,6 +9,26 @@
     });
 }
 
+// Reload list
+function reloadStatusList() {
+    return $.ajax({
+        url: '/Status/List',
+        type: 'GET',
+        success: function (html) {
+            const $listModal = $('#staticBackdropStatusList');
+            $listModal.find('.modal-body').html(html);
+
+            if ($.fn.DataTable.isDataTable('#statusTable')) {
+                $('#statusTable').DataTable().destroy();
+            }
+            $('#statusTable').DataTable({
+                responsive: true,
+                autoWidth: false
+            });
+        }
+    });
+}
+
 // Cargar lista de ESTATUS en modal
 $(document).on('click', '.StatusList', function (e) {
     e.preventDefault();
@@ -95,7 +115,7 @@ $(document).on('click', '.submitEditStatus', function (e) {
                     //cerrar modal Crear
                     bootstrap.Modal.getInstance($addModal[0]).hide();
                     // recargar lista sin refresh
-                    await reloadCategoryList();
+                    await reloadStatusList();
                 });
             } else {
                 Swal.fire({
