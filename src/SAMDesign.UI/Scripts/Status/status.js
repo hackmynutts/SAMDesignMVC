@@ -29,6 +29,8 @@ function reloadStatusList() {
     });
 }
 
+
+
 // Cargar lista de ESTATUS en modal
 $(document).on('click', '.StatusList', function (e) {
     e.preventDefault();
