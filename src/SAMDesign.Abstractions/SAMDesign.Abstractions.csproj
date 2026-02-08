@@ -52,6 +52,7 @@
     <Compile Include="BusinessLogic\PRODUCTS\Details\IProductDetails_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\Edit\IProductEdit_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\List\IProductsList_BL.cs" />
+    <Compile Include="BusinessLogic\STATUS\Add\IStatusAdd_BL.cs" />
     <Compile Include="BusinessLogic\STATUS\Details\IStatusDetails_BL.cs" />
     <Compile Include="BusinessLogic\STATUS\Edit\IStatusEdit_BL.cs" />
     <Compile Include="BusinessLogic\STATUS\List\IStatusList_BL.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="DataAccess\PRODUCTS\Details\IProductDetails_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\Edit\IProductEdit_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\List\IProductList_DA.cs" />
+    <Compile Include="DataAccess\STATUS\Add\IStatusAdd_DA.cs" />
     <Compile Include="DataAccess\STATUS\Details\IStatusDetails_DA.cs" />
     <Compile Include="DataAccess\STATUS\Edit\IStatusEdit_DA.cs" />
     <Compile Include="DataAccess\STATUS\List\IStatusList_DA.cs" />
@@ -75,9 +77,6 @@
     <Compile Include="UIModules\ProductsDTO.cs" />
     <Compile Include="UIModules\StatusDTO.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BusinessLogic\STATUS\Add\" />
-    <Folder Include="DataAccess\STATUS\Add\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

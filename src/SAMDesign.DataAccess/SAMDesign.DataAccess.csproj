@@ -67,6 +67,7 @@
     <Compile Include="PRODUCTS\Edit\ProductEdit_DA.cs" />
     <Compile Include="PRODUCTS\List\ProductList_DA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="STATUS\Add\StatusAdd_DA.cs" />
     <Compile Include="STATUS\Details\StatusDetails_DA.cs" />
     <Compile Include="STATUS\Edit\StatusEdit_DA.cs" />
     <Compile Include="STATUS\List\StatusList_DA.cs" />
@@ -81,9 +82,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="STATUS\Add\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

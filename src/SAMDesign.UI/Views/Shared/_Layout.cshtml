@@ -186,12 +186,13 @@
 
     @Scripts.Render("~/bundles/jquery")
 
-    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
-    <script src="~/Scripts/CategoryType/Category.js"></script>
-    <script src="~/Scripts/Status/Status.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/DataTable/dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
     <script src="~/Scripts/SweetAlert/sweetalert2@11.js"></script>
+
+    <script src="~/Scripts/CategoryType/Category.js"></script>
+    <script src="~/Scripts/Status/Status.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
@@ -290,6 +291,25 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Modal CREAR status *@
+<div class="modal fade" id="staticBackdropStatusAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropStatusAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropStatusAddModalLabel">Crear estado</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary submitAddStatus">Guardar</button>
             </div>
         </div>
     </div>
