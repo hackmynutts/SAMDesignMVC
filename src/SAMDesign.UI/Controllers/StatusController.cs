@@ -1,5 +1,6 @@
 ﻿using SAMDesign.Abstractions.BusinessLogic.EVENTLOGS.Add;
 using SAMDesign.Abstractions.BusinessLogic.STATUS.Add;
+using SAMDesign.Abstractions.BusinessLogic.STATUS.Delete;
 using SAMDesign.Abstractions.BusinessLogic.STATUS.Details;
 using SAMDesign.Abstractions.BusinessLogic.STATUS.Edit;
 using SAMDesign.Abstractions.BusinessLogic.STATUS.List;
@@ -8,6 +9,7 @@ using SAMDesign.Abstractions.UIModules;
 using SAMDesign.BusinessLogic.EVENTLOG.Add;
 using SAMDesign.BusinessLogic.general.DateManagement;
 using SAMDesign.BusinessLogic.STATUS.Add;
+using SAMDesign.BusinessLogic.STATUS.Delete;
 using SAMDesign.BusinessLogic.STATUS.Details;
 using SAMDesign.BusinessLogic.STATUS.Edit;
 using SAMDesign.BusinessLogic.STATUS.List;
@@ -29,6 +31,7 @@ namespace SAMDesign.UI.Controllers
         private readonly IStatusEdit_BL _statusEditBL;
         private readonly IStatusDetails_BL _statusDetailsBL;
         private readonly IStatusList_BL _statusListBL;
+        private readonly IStatusDelete_BL _statusDeleteBL;
         public StatusController() 
         {
             _eventLogAddBL = new EventLogAdd_BL();
@@ -37,6 +40,7 @@ namespace SAMDesign.UI.Controllers
             _statusEditBL = new StatusEdit_BL();
             _statusDetailsBL = new StatusDetails_BL();
             _statusListBL = new StatusList_BL();
+            _statusDeleteBL = new StatusDelete_BL();
         }
 
         // GET: Status
@@ -181,7 +185,7 @@ namespace SAMDesign.UI.Controllers
                     activadoPor = User.Identity.Name,
                     datosAnteriores = JsonSerializer.Serialize(statusPrev),
                     datosPosteriores = JsonSerializer.Serialize(status)
-                    };
+                };
                 int logResult = await _eventLogAddBL.Add(log);
                 if (Request.IsAjaxRequest())
                     return Json(new { success = false, message = "Error al editar el Status." });
@@ -191,17 +195,55 @@ namespace SAMDesign.UI.Controllers
 
         // POST: Status/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                StatusDTO statusPrev = _statusDetailsBL.Get(id);
+                StatusDTO status = _statusDetailsBL.Get(id);
 
-                return RedirectToAction("List");
+                bool deleted = await _statusDeleteBL.Delete(id);
+                if (deleted)
+                {
+                    EventLogDTO log = new EventLogDTO
+                    {
+                        EventTable = "Status",
+                        TypeEvent = "Delete",
+                        descripcionDeEvento = $"Status eliminado: {status.name}",
+                        fechaDeEvento = _date.GetDate(),
+                        stackTrace = "Status/Delete/success",
+                        activadoPor = User.Identity.Name,
+                        datosAnteriores = JsonSerializer.Serialize(statusPrev)
+                    };
+                    int logResult = await _eventLogAddBL.Add(log);
+                    if (Request.IsAjaxRequest())
+                        return Json(new { success = true });
+                    return RedirectToAction("List");
+                }
+                else
+                {
+                    if (Request.IsAjaxRequest())
+                        return Json(new { success = false, message = "No se pudo eliminar el estado." });
+                    ModelState.AddModelError(string.Empty, "Error al eliminar el estado.");
+                    return PartialView("List", _statusListBL.List());
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return PartialView();
+                EventLogDTO log = new EventLogDTO
+                {
+                    EventTable = "Status",
+                    TypeEvent = "Delete/Fail",
+                    descripcionDeEvento = $"Error al eliminar el estado: {id}",
+                    fechaDeEvento = _date.GetDate(),
+                    stackTrace = ex.StackTrace,
+                    activadoPor = User.Identity.Name
+                };
+                int logResult = await _eventLogAddBL.Add(log);
+                if (Request.IsAjaxRequest())
+                    return Json(new { success = false, message = "Error al eliminar el estado." });
+
+                return PartialView("List");
             }
         }
     }

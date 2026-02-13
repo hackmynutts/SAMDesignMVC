@@ -68,6 +68,7 @@
     <Compile Include="PRODUCTS\List\ProductList_DA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="STATUS\Add\StatusAdd_DA.cs" />
+    <Compile Include="STATUS\Delete\StatusDelete_DA.cs" />
     <Compile Include="STATUS\Details\StatusDetails_DA.cs" />
     <Compile Include="STATUS\Edit\StatusEdit_DA.cs" />
     <Compile Include="STATUS\List\StatusList_DA.cs" />
