@@ -212,3 +212,53 @@ $(document).on('click', '.submitEditStatus', function (e) {
         }
     });
 });
+
+// Delete status
+$(document).on('click', '.DeleteStatus', function (e) {
+    e.preventDefault();
+
+    const id = $(this).data('id');
+    const url = `/Status/Delete/${id}`;
+
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "El estado será eliminado.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Sí, ELIMINAR",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            showLoadingSwal("Eliminando estado...");
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "json",
+                success: async function (data) {
+                    Swal.close();
+                    if (data.success) {
+                        Swal.fire({
+                            title: "Listo!",
+                            text: "Estado eliminado correctamente.",
+                            icon: "success"
+                        });
+                        await reloadStatusList();
+
+                    } else {
+                        Swal.fire("Oops!", data.message || "No se pudo eliminar.", "error");
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                    Swal.fire("Error", "Error en el servidor.", "error");
+                }
+            });
+        }
+    });
+});

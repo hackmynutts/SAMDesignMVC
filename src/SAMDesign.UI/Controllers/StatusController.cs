@@ -200,7 +200,6 @@ namespace SAMDesign.UI.Controllers
             try
             {
                 StatusDTO statusPrev = _statusDetailsBL.Get(id);
-                StatusDTO status = _statusDetailsBL.Get(id);
 
                 bool deleted = await _statusDeleteBL.Delete(id);
                 if (deleted)
@@ -209,7 +208,7 @@ namespace SAMDesign.UI.Controllers
                     {
                         EventTable = "Status",
                         TypeEvent = "Delete",
-                        descripcionDeEvento = $"Status eliminado: {status.name}",
+                        descripcionDeEvento = $"Status eliminado: {statusPrev.name}",
                         fechaDeEvento = _date.GetDate(),
                         stackTrace = "Status/Delete/success",
                         activadoPor = User.Identity.Name,
