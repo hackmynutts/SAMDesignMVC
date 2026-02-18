@@ -70,6 +70,15 @@
       <Name>SAMDesign.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="INVENTORYLines\Add\" />
+    <Folder Include="INVENTORYLines\Details\" />
+    <Folder Include="INVENTORYLines\Edit\" />
+    <Folder Include="INVENTORYLines\List\" />
+    <Folder Include="INVENTORY\Add\" />
+    <Folder Include="INVENTORY\Details\" />
+    <Folder Include="INVENTORY\Edit\" />
+    <Folder Include="INVENTORY\List\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -79,6 +79,23 @@
     <Compile Include="UIModules\ProductsDTO.cs" />
     <Compile Include="UIModules\StatusDTO.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BusinessLogic\INVENTORYLines\Add\" />
+    <Folder Include="BusinessLogic\INVENTORYLines\Details\" />
+    <Folder Include="BusinessLogic\INVENTORYLines\Edit\" />
+    <Folder Include="BusinessLogic\INVENTORYLines\List\" />
+    <Folder Include="BusinessLogic\INVENTORY\Add\" />
+    <Folder Include="BusinessLogic\INVENTORY\Details\" />
+    <Folder Include="BusinessLogic\INVENTORY\Edit\" />
+    <Folder Include="BusinessLogic\INVENTORY\List\" />
+    <Folder Include="DataAccess\INVENTORYLines\Add\" />
+    <Folder Include="DataAccess\INVENTORYLines\Details\" />
+    <Folder Include="DataAccess\INVENTORYLines\Edit\" />
+    <Folder Include="DataAccess\INVENTORYLines\List\" />
+    <Folder Include="DataAccess\INVENTORY\Add\" />
+    <Folder Include="DataAccess\INVENTORY\Details\" />
+    <Folder Include="DataAccess\INVENTORY\Edit\" />
+    <Folder Include="DataAccess\INVENTORY\List\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
