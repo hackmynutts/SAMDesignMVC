@@ -121,7 +121,13 @@
                                         </ul>
                                     </div>
 
-                                    <a class="dropdown-item nav-link text-black" href="../../src/admin/Inventario.php">INVENTARIO</a>
+                                    @Html.ActionLink(
+                                        "INVENTARIO",
+                                        "List",
+                                        "Inventory",
+                                        null,
+                                        new { @class = "dropdown-item nav-link text-black" }
+                                    )
                                     <a class="dropdown-item nav-link text-black" href="../../src/admin/adminOrdenes.php">ORDENES</a>
                                     <a class="dropdown-item nav-link text-black" href="../../src/admin/adminBilling.php">FACTURAS</a>
                                     <div>

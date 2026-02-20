@@ -48,6 +48,7 @@
     <Compile Include="BusinessLogic\CATEGORY\List\ICategoryList_BL.cs" />
     <Compile Include="BusinessLogic\EVENTLOGS\Add\IEventLogAdd_BL.cs" />
     <Compile Include="BusinessLogic\EVENTLOGS\List\IEventLogList_BL.cs" />
+    <Compile Include="BusinessLogic\INVENTORY\List\IInventoryList_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\Add\IProductAdd_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\Details\IProductDetails_BL.cs" />
     <Compile Include="BusinessLogic\PRODUCTS\Edit\IProductEdit_BL.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="DataAccess\CATEGORY\List\ICategoryList_DA.cs" />
     <Compile Include="DataAccess\EVENTLOG\Add\IEventLogAdd_DA.cs" />
     <Compile Include="DataAccess\EVENTLOG\List\IEventLogList_DA.cs" />
+    <Compile Include="DataAccess\INVENTORY\List\IInventoryList_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\Add\IProductAdd_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\Details\IProductDetails_DA.cs" />
     <Compile Include="DataAccess\PRODUCTS\Edit\IProductEdit_DA.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIModules\CategoryDTO.cs" />
     <Compile Include="UIModules\EventLogDTO.cs" />
+    <Compile Include="UIModules\InventoryDTO.cs" />
     <Compile Include="UIModules\ProductsDTO.cs" />
     <Compile Include="UIModules\StatusDTO.cs" />
   </ItemGroup>
@@ -87,7 +90,6 @@
     <Folder Include="BusinessLogic\INVENTORY\Add\" />
     <Folder Include="BusinessLogic\INVENTORY\Details\" />
     <Folder Include="BusinessLogic\INVENTORY\Edit\" />
-    <Folder Include="BusinessLogic\INVENTORY\List\" />
     <Folder Include="DataAccess\INVENTORYLines\Add\" />
     <Folder Include="DataAccess\INVENTORYLines\Details\" />
     <Folder Include="DataAccess\INVENTORYLines\Edit\" />
@@ -95,7 +97,6 @@
     <Folder Include="DataAccess\INVENTORY\Add\" />
     <Folder Include="DataAccess\INVENTORY\Details\" />
     <Folder Include="DataAccess\INVENTORY\Edit\" />
-    <Folder Include="DataAccess\INVENTORY\List\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

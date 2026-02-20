@@ -49,6 +49,7 @@
     <Compile Include="EVENTLOG\Add\EventLogAdd_BL.cs" />
     <Compile Include="EVENTLOG\List\EventLogList_BL.cs" />
     <Compile Include="general\DateManagement\date.cs" />
+    <Compile Include="INVENTORY\List\InventoryList_BL.cs" />
     <Compile Include="PRODUCTS\Add\ProductAdd_BL.cs" />
     <Compile Include="PRODUCTS\Details\ProductDetails_BL.cs" />
     <Compile Include="PRODUCTS\Edit\ProductEdit_BL.cs" />
@@ -78,7 +79,6 @@
     <Folder Include="INVENTORY\Add\" />
     <Folder Include="INVENTORY\Details\" />
     <Folder Include="INVENTORY\Edit\" />
-    <Folder Include="INVENTORY\List\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

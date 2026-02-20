@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SAMDesign.Abstractions.UIModules.InventoryDTO>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Listas de inventarios</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="table-responsive-lg">
+    <table class="table" id="inventoryTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.statusID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.createdBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.createdOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.modifiedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.modifiedOn)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.statusID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.createdBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.createdOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.modifiedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.modifiedOn)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/Inventory/inventory.js"></script>
+}
